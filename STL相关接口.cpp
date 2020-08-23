@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-class vectorTest {
+class STLTest {
 	
 public:
 	vector<int> mv0;
@@ -19,59 +19,86 @@ public:
 	vector<vector<int>> mv6 = { {1,2},{5,1},{4,3} };
 	set<int> st;
 	map<int,int> mp;
-	vectorTest() {
-		//assignº¯ÊıÈıÖÖÖØÔØ£º
-		mv0.assign(10, 0);//10¸ö0
-		mv2.assign(mv0.begin(),mv0.end());//ÁíÒ»ÈİÆ÷µÄ¿ªÊ¼µ½½áÊø
-		mv3.assign({ 1,2,3 });//Ò»¸ö³õÊ¼»¯ÁĞ±í£¬Î´Ö¸¶¨ÀàĞÍ
+	string s1 = "abaaba";
+	string s2 = "str2";
+	string s3 = "str3";
+	STLTest(){}
+	//è¾“å…¥è¾“å‡ºè§£è€¦åˆï¼ŒåŠ å¿«ä¸€ç‚¹é€Ÿåº¦
+	void cincout() {
+		static const auto __ = []() {
+			ios::sync_with_stdio(false);
+			cin.tie(nullptr);
+			return nullptr;
+		}();
+	}
+	void vectorTest() {
+		//assignå‡½æ•°ä¸‰ç§é‡è½½ï¼š
+		mv0.assign(10, 0);//10ä¸ª0
+		mv2.assign(mv0.begin(),mv0.end());//å¦ä¸€å®¹å™¨çš„å¼€å§‹åˆ°ç»“æŸ
+		mv3.assign({ 1,2,3 });//ä¸€ä¸ªåˆå§‹åŒ–åˆ—è¡¨ï¼ŒæœªæŒ‡å®šç±»å‹
 
-		//°´ÕÕlambda±í´ïÊ½º¯ÊıËùÊ¾ÅÅĞò
+		//æŒ‰ç…§lambdaè¡¨è¾¾å¼å‡½æ•°æ‰€ç¤ºæ’åº
 		sort(mv6.begin(), mv6.end(), [](vector<int>& nums1, vector<int>& nums2)->bool { return nums1[0] > nums2[0]; });
 
-		//ÔÚ1ºÅÎ»ÖÃÉ¾³ı
+		//åœ¨1å·ä½ç½®åˆ é™¤
 		mv6.erase(mv6.begin() + 1);
 
-		//ÔÚ1ºÅÎ»ÖÃ²åÈë
+		//åœ¨1å·ä½ç½®æ’å…¥
 		mv6.insert(mv6.begin() + 1, vector<int>{4, 4});
 
-		//resizeº¯ÊıÓÃÀ´ÖØĞÂÌî³äÏòÁ¿£¬
-		//ÈôĞÂ´óĞ¡Ğ¡ÓÚ¾É´óĞ¡£¬ÔªËØÖµ²»±ä£¬·ñÔò¶àÓàµÄÌî³äµÚ¶ş¸öĞÎ²ÎµÄÖµ
+		//resizeå‡½æ•°ç”¨æ¥é‡æ–°å¡«å……å‘é‡ï¼Œ
+		//è‹¥æ–°å¤§å°å°äºæ—§å¤§å°ï¼Œå…ƒç´ å€¼ä¸å˜ï¼Œå¦åˆ™å¤šä½™çš„å¡«å……ç¬¬äºŒä¸ªå½¢å‚çš„å€¼
 		mv1.resize(10);
-		mv1.resize(5, 2);//ÖØĞÂÌî³ä2,µ«ĞÂ´óĞ¡Ğ¡ÓÚ¾É´óĞ¡£¬ÔªËØÖµ²»±ä£¬Ö»¸Ä±ä´óĞ¡
+		mv1.resize(5, 2);//é‡æ–°å¡«å……2,ä½†æ–°å¤§å°å°äºæ—§å¤§å°ï¼Œå…ƒç´ å€¼ä¸å˜ï¼Œåªæ”¹å˜å¤§å°
 
-		//µü´úÆ÷£ºiter
+		//è¿­ä»£å™¨ï¼šiter
 		mv4 = { 1,2,3,4,5,6,7,8,9,10 };
 		for (auto iter = mv4.begin(); iter != mv4.end(); iter++) {
 			cout << *iter << " ";
 		}
 		cout << endl;
-		//C++11ĞÂÔöµÄcbegin()¡¢cend()¡¢crbegin()¡¢crend()£¬¼´Ô­°æÉÏ¼Óconst
+		//C++11æ–°å¢çš„cbegin()ã€cend()ã€crbegin()ã€crend()ï¼Œå³åŸç‰ˆä¸ŠåŠ const
 		for (auto iter = mv4.cbegin(); iter != mv4.cend(); iter++) {
 			cout << *iter << " ";
 		}
 		cout << endl;
-		//·­×ªÊä³ö
+		//ç¿»è½¬è¾“å‡º
 		for (auto iter = mv4.rbegin(); iter != mv4.rend(); iter++) {
 			cout << *iter << " ";
 		}
 		cout << endl;
-		//µÚ¶şÖÖ·½Ê½
+		//ç¬¬äºŒç§æ–¹å¼
 		for (auto iter = mv4.end()-1; iter >= mv4.begin(); iter--) {
 			cout << *iter << " ";
 			if (iter == mv4.begin()) break;
 		}
 		cout << endl;
 
+
+		//ä¸çŸ¥é“ä¸€è¡Œå¤šå°‘å…ƒç´ çš„è¾“å…¥
+		vector<int> nums;
+		int num;
+		while (cin >> num) {
+			nums.push_back(num);
+			if (getchar() == '\n')
+			{
+				break;
+			}
+		}
 	}
 
 	void mapTest() {
 		for (auto mv : mv6) {
-			if (mp.find(mv[0]) != mp.end()) continue;//²éÕÒ
-			mp[mv[0]] = mv[1];//²åÈëmap
+			if (mp.find(mv[0]) != mp.end()) continue;//æŸ¥æ‰¾
+			mp[mv[0]] = mv[1];//æ’å…¥map
 		}
-		mp.erase(mv6[1][0]);//É¾³ıkey=mv6[1][0]µÄÖµ£¬·ñÔò±¨´í¡£
+		mp.erase(mv6[1][0]);//åˆ é™¤key=mv6[1][0]çš„å€¼ï¼Œå¦åˆ™æŠ¥é”™ã€‚
 
-		//±éÀú£º
+		auto iter = mp.begin();
+		advance(iter, 2);//å°†iterå‘å‰ç§»åŠ¨2
+		advance(iter, -1);//å°†iterå‘åç§»åŠ¨1
+
+		//éå†ï¼š
 		int key = 1;
 		for (auto iter = mp.begin(); iter != mp.end(); iter++) {
 			if (iter->first == key) {
@@ -81,12 +108,12 @@ public:
 	}
 	void setTest() {
 		for (auto mv : mv6) {
-			if (st.find(mv[0]) != st.end()) continue;//²éÕÒ
-			st.insert(mv[0]);//²åÈëset
+			if (st.find(mv[0]) != st.end()) continue;//æŸ¥æ‰¾
+			st.insert(mv[0]);//æ’å…¥set
 		}
-		st.erase(mv6[1][0]);//É¾³ıkey=mv6[1][0]µÄÖµ£¬·ñÔò±¨´í¡£
+		st.erase(mv6[1][0]);//åˆ é™¤key=mv6[1][0]çš„å€¼ï¼Œå¦åˆ™æŠ¥é”™ã€‚
 
-		//±éÀú£º
+		//éå†ï¼š
 		int key = 1;
 		for (auto iter = st.begin(); iter != st.end(); iter++) {
 			if (*iter == key) {
@@ -94,6 +121,27 @@ public:
 				st.insert(3);
 			}
 		}
+	}
+	void stringTest() {
+		int a = 12345;
+		string str = to_string(a);
+		a = stoi(str);
+		int b = s2.at(3) - '0';
+		s1 = s1 + 'x';
+		s1.insert(s1.begin(), 'h');
+		s1.append("hahaha");//åœ¨å°¾éƒ¨æ·»åŠ 
+
+		//ä¸çŸ¥é“è¾“å…¥å¤šå°‘è¡Œå­—ç¬¦ä¸²ï¼Œä»¥è¾“å…¥ä¸€ä¸ªç©ºè¡Œæ¥ç»“æŸï¼š
+		vector<string> sv;
+		while (1) {
+			string s;
+			cin >> s;
+			if (getchar() == '\n') {
+				if (getchar() == '\n') break;
+			}
+			sv.push_back(s);
+		}
+		
 	}
 	void out(vector<int>& nums) {
 		for (int n : nums) {
@@ -105,8 +153,8 @@ public:
 };
 
 //int main() {
-//	vectorTest vt;
-//	//vt.out(vt.mv1);
+//	STLTest stl;
+//
 //	system("pause");
 //	return 0;
 //}
