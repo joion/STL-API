@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 class STLTest {
 	
 public:
@@ -30,6 +28,21 @@ public:
 			cin.tie(nullptr);
 			return nullptr;
 		}();
+	}
+	static bool cmpr(const pair<int, int>& p1, const pair<int, int>& p2) {
+		if (p1.first < p2.first) {
+			return true;
+		}
+		return false;
+	}
+	vector<int> sortRewrite(vector<int>& nums) {
+		int n = nums.size();
+		vector<int> ans(n, 0);
+		vector<pair<int, int>> vp(n);
+		for (int i = 0; i < n; i++) {
+			vp[i] = { nums[i],i };
+		}
+		sort(vp.begin(), vp.end(), cmpr);
 	}
 	void vectorTest() {
 		//（1）assign函数三种重载：
@@ -136,11 +149,29 @@ public:
 
 		multimap<int, int> nkmap;//重复的key值，根据val值升序排序
 
+		//insert 含义是：
+		//如果key存在，则插入失败，如果key不存在，就创建这个key－value。
+		//实例 : map.insert((key, value))
+		//利用下标操作的含义是：
+		//如果这个key存在，就更新value；如果key不存在，就创建这个key－value对
+		//实例：map[key] = value
+		mp.insert(pair<int, int>{1, 3});
+		mp.insert(pair<int, int>{1, 4});
+
 		//遍历：
 		int key = 1;
 		for (auto iter = mp.begin(); iter != mp.end(); iter++) {
 			if (iter->first == key) {
 				iter->second = 3;
+			}
+		}
+		//遍历删除，注意迭代器失效情况
+		for (auto iter = mp.begin(); iter != mp.end();) {
+			if (iter->first == key) {
+				mp.erase(iter++);//满足删除条件，删除当前结点，并指向下面一个结点
+			}
+			else {
+				iter++;
 			}
 		}
 	}
@@ -208,7 +239,7 @@ public:
 
 //int main() {
 //	STLTest stl;
-//	stl.pqueueTest();
+//	stl.mapTest();
 //	system("pause");
 //	return 0;
 //}
